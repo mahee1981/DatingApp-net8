@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AccountsService } from '../_services/accounts.service';
 
 @Component({
   selector: 'app-register',
@@ -7,15 +8,25 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
+
 })
 export class RegisterComponent {
-  model: any ={};
+  cancelRegisterEvent = output<boolean>(); 
+  private accountService = inject(AccountsService);
+
+  model: any = {};
 
   register() {
-    console.log(this.model);
+    this.accountService.register(this.model).subscribe({
+      next: response => {
+        console.log(response);
+        this.cancel();
+      },
+      error: error => console.log(error)
+    })
   }
 
   cancel() {
-    console.log("Cancelled");
+    this.cancelRegisterEvent.emit(false);
   }
 }

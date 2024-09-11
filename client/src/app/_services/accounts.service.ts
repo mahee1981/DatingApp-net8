@@ -13,13 +13,25 @@ export class AccountsService {
   baseUrl = 'https://localhost:5001/api/';
   currentUser = signal<User | null>(null);
 
-  login(model: any) {
-    return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
+  sendUserInformation(model: any, route: string) {
+    return this.http.post<User>(this.baseUrl + 'account/' + route, model).pipe(
       map(user => {
-        localStorage.setItem('user', JSON.stringify(user));
-        this.currentUser.set(user);
+        if(user){
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUser.set(user);
+        }
+        return user;
       })
     );
+  }
+
+  login(model: any) {
+    return this.sendUserInformation(model, 'login');
+  }
+
+  
+  register(model: any) {
+    return this.sendUserInformation(model, 'register');
   }
 
   logout() {
