@@ -4,7 +4,6 @@ using API.Data;
 using API.DTOs;
 using API.Interfaces;
 using API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,7 +42,7 @@ namespace API.Controllers
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Username.ToLower());
             if(user == null)
-                return Unauthorized("Invalid username or password");
+                return Unauthorized("Invalid username");
             
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));

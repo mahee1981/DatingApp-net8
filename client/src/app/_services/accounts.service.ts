@@ -6,7 +6,7 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-// these are singletons
+// these are singletons and are good to share data between components
 export class AccountsService {
 
   private http = inject(HttpClient);
@@ -28,7 +28,6 @@ export class AccountsService {
   login(model: any) {
     return this.sendUserInformation(model, 'login');
   }
-
   
   register(model: any) {
     return this.sendUserInformation(model, 'register');

@@ -1,3 +1,7 @@
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
 }
+
+.dropdown-divider {
+    background-color: #32fbe2;
+}
