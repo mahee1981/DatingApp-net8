@@ -5,6 +5,7 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown"
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TitleCasePipe } from '@angular/common';
+import { UserLoginInfo } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -14,15 +15,18 @@ import { TitleCasePipe } from '@angular/common';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  model: any = {};
+  model: UserLoginInfo = { username: "", password: "" };
   accountService = inject(AccountsService);
   private router = inject(Router);
   private toastr = inject(ToastrService);
 
-  login(){
+  login() : void {
     this.accountService.login(this.model).subscribe({
       next: () => {
         this.router.navigateByUrl('/members');
+        this.model.username = "";
+        this.model.password = "";
+
       },
       error: error => {
         this.toastr.error(error.error);
@@ -30,7 +34,7 @@ export class NavComponent {
     });
   }
 
-  logout() {
+  logout() : void {
     this.accountService.logout();
     this.router.navigateByUrl('/');
   }

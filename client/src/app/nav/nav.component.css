@@ -3,5 +3,12 @@
 }
 
 .dropdown-divider {
-    background-color: #32fbe2;
+    background-color: rgb(68,217,232);
+}
+
+.dropdown-menu {
+    border-color: rgb(68,217,232);
+    border-style: solid;
+    border-top-style: none;
+    border-width: 0.5px;
 }
