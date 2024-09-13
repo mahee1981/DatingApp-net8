@@ -18,14 +18,14 @@ public class UsersController(IUserRepository userRepository) : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsersAsync()
     {
-        var users = await userRepository.GetMemberssAsync();
+        var users = await userRepository.GetMembersAsync();
 
 
         return Ok(users);
     }
 
 
-    [HttpGet("{username}")]
+    [HttpGet("{username}")] // Example: api/users/ursula
     public async Task<ActionResult<MemberDTO>> GetUserAsync(string username)
     {
         var user = await userRepository.GetMemberByUsernameAsync(username);

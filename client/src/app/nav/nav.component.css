@@ -12,3 +12,24 @@
     border-top-style: none;
     border-width: 0.5px;
 }
+
+.dropdown-item:hover {
+    color: #e8e8e8;
+    
+}
+
+.nav-link {
+    color: rgb(68,217,232);
+}
+
+.nav-link:hover {
+    color: #e8e8e8
+}
+
+.nav-link-active {
+    color: #ea39b8
+}
+
+.navbar-brand {
+    color: #ea39b8
+}

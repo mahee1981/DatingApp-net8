@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+/* ea39b8 */
+.card {
+    border-color: rgb(68,217,232);
+}
+
+.tab-panel {
+    border: 1px solid rgb(68,217,232);
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
+    border-bottom: 4px solid #e8e8e8;
+  }
+  
+  .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
+    border: 0;
+    background: none !important;
+    color: #e8e8e8;
+  }
+  
+  .member-tabset > .nav-tabs > li.open > a > i, .member-tabset > .nav-tabs > li:hover > a > i {
+    color: #e8e8e8;
+  }
+  
+  .member-tabset > .nav-tabs > li.open .dropdown-menu, .member-tabset > .nav-tabs > li:hover .dropdown-menu {
+    margin-top: 0px;
+  }
+  
+  .member-tabset > .nav-tabs > li.active {
+    border-bottom: 4px solid #ea39b8;
+    position: relative;
+  }
+  
+  .member-tabset > .nav-tabs > li.active > a {
+    border: 0 !important;
+    color: #ea39b8;
+  }
+  
+  .member-tabset > .nav-tabs > li.active > a > i {
+    color: #ea39b8;
+  }
+  
+  .member-tabset > .tab-content {
+    margin-top: -3px;
+    border: 0;
+    border-top: 1px solid rgb(68,217,232);
+    padding: 15px 0;
+  }
+  
