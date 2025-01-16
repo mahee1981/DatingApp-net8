@@ -24,6 +24,7 @@ export class NavComponent {
     this.accountService.login(this.model).subscribe({
       next: () => {
         this.router.navigateByUrl('/members');
+        //reset form when logged in
         this.model.username = "";
         this.model.password = "";
 

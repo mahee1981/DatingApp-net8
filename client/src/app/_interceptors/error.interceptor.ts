@@ -12,26 +12,26 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
 
   return next(req).pipe(
-    catchError(error => {
-      if (error) {
+    catchError(errorResponse => {
+      if (errorResponse) {
 
-        switch (error.status) {
+        switch (errorResponse.status) {
           case 400:
-            if (error.error.errors) {
+            if (errorResponse.error.errors) {
               const modalStateErrors = [];
-              for (const key in error.error.errors) {
-                if (error.error.errors[key]) {
-                  modalStateErrors.push(error.error.errors[key]);
+              for (const key in errorResponse.error.errors) {
+                if (errorResponse.error.errors[key]) {
+                  modalStateErrors.push(errorResponse.error.errors[key]);
                 }
               }
               throw modalStateErrors.flat();
             } else {
-              toastr.error(error.error, error.status);
+              toastr.error(errorResponse.error, errorResponse.status);
             }
             break;
 
           case 401:
-            toastr.error("Unauthorized", error.status);
+            toastr.error("Unauthorized", errorResponse.status);
 
             break;
           case 404:
@@ -41,7 +41,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           case 500:
             const navigationExtras: NavigationExtras = {
               state: {
-                error: error.error
+                error: errorResponse.error
               }
             }
             router.navigateByUrl("/server-error", navigationExtras);
@@ -52,7 +52,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             break;
         }
       }
-      throw error;
+      throw errorResponse;
     })
   );
 };

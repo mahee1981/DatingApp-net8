@@ -18,6 +18,10 @@
     
 }
 
+.navbar-brand:hover {
+    color: #e8e8e8
+}
+
 .nav-link {
     color: rgb(68,217,232);
 }
