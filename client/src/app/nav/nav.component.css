@@ -1,13 +1,14 @@
-.dropdown-toggle, .dropdown-item {
+.dropdown-toggle,
+.dropdown-item {
     cursor: pointer;
 }
 
 .dropdown-divider {
-    background-color: rgb(68,217,232);
+    background-color: rgb(68, 217, 232);
 }
 
 .dropdown-menu {
-    border-color: rgb(68,217,232);
+    border-color: rgb(68, 217, 232);
     border-style: solid;
     border-top-style: none;
     border-width: 0.5px;
@@ -15,7 +16,7 @@
 
 .dropdown-item:hover {
     color: #e8e8e8;
-    
+
 }
 
 .navbar-brand:hover {
@@ -23,7 +24,7 @@
 }
 
 .nav-link {
-    color: rgb(68,217,232);
+    color: rgb(68, 217, 232);
 }
 
 .nav-link:hover {
@@ -36,4 +37,11 @@
 
 .navbar-brand {
     color: #ea39b8
+}
+
+img {
+    max-height: 50px;
+    border: 2px solid #e8e8e8;
+    display: inline;
+
 }
