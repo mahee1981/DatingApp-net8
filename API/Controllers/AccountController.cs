@@ -5,38 +5,41 @@ using API.Data;
 using API.DTOs;
 using API.Interfaces;
 using API.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
 
-    public class AccountController(DataContext context, ITokenService tokenService) : BaseApiController
+    public class AccountController(DataContext context,
+                                   ITokenService tokenService,
+                                   IMapper mapper) : BaseApiController
     {
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
             using var hmac = new HMACSHA512();
 
-            if(await UserExists(registerDTO.Username))
+            if(await UserExists(registerDTO.Username!))
                 return BadRequest("User already exists!");
 
-            return Ok();
-            // var user = new AppUser()
-            // {
-            //     UserName = registerDTO.Username,
-            //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
-            //     PasswordSalt = hmac.Key
-            // };
-            // context.Users.Add(user);
+            var user = mapper.Map<AppUser>(registerDTO);
 
-            // await context.SaveChangesAsync();
+            user.UserName = registerDTO.Username!.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password));
+            user.PasswordSalt = hmac.Key;
 
-            // return new UserDTO
-            // {
-            //     Username = user.UserName,
-            //     Token = tokenService.CreateToken(user)
-            // };
+            context.Users.Add(user);
+
+            await context.SaveChangesAsync();
+
+            return new UserDTO
+            {
+                Username = user.UserName,
+                Token = tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
+            };
 
 
         }
@@ -61,6 +64,7 @@ namespace API.Controllers
             return new UserDTO
             {
                 Username = user.UserName,
+                KnownAs = user.KnownAs,
                 Token = tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
