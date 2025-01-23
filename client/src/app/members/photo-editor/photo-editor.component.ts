@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit, output } from '@angular/core';
 import { Member } from '../../_models/member';
 import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
-import { AccountsService } from '../../_services/accounts.service';
+import { AccountService } from '../../_services/accounts.service';
 import { environment } from '../../../environments/environment';
 import { MembersService } from '../../_services/members.service';
 import { Photo } from '../../_models/photo';
@@ -16,7 +16,7 @@ import { Photo } from '../../_models/photo';
 })
 export class PhotoEditorComponent implements OnInit {
 
-  private accountService = inject(AccountsService);
+  private accountService = inject(AccountService);
   private memberService = inject(MembersService);
   member = input.required<Member>();
   uploader?: FileUploader;

@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 // these are singletons and are good to share data between components
-export class AccountsService {
+export class AccountService {
 
   private http = inject(HttpClient);
   baseUrl : string = environment.apiUrl;

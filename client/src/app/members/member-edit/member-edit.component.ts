@@ -1,16 +1,18 @@
 import { Component, HostListener, inject, input, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../../_models/member';
-import { AccountsService } from '../../_services/accounts.service';
+import { AccountService } from '../../_services/accounts.service';
 import { MembersService } from '../../_services/members.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
+import { DatePipe } from '@angular/common';
+import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [TabsModule, FormsModule, PhotoEditorComponent],
+  imports: [TabsModule, FormsModule, PhotoEditorComponent, DatePipe, TimeagoModule],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css'
 })
@@ -23,7 +25,7 @@ export class MemberEditComponent implements OnInit {
   } 
   
   member?: Member;
-  private accountService = inject(AccountsService);
+  private accountService = inject(AccountService);
   private memberService = inject(MembersService);
   private toastr = inject(ToastrService);
 

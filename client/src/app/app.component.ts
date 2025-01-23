@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from "./nav/nav.component";
-import { AccountsService } from './_services/accounts.service';
+import { AccountService } from './_services/accounts.service';
 import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
@@ -13,7 +13,7 @@ import { NgxSpinnerComponent } from 'ngx-spinner';
 })
 export class AppComponent implements OnInit{
 
-  private accountService = inject(AccountsService);
+  private accountService = inject(AccountService);
   
   ngOnInit(): void {
     this.setCurrentUser();

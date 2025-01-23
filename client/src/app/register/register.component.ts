@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { AccountsService } from '../_services/accounts.service';
+import { AccountService } from '../_services/accounts.service';
 import { TextInputComponent } from "../_forms/text-input/text-input.component";
 import { DatePickerComponent } from '../_forms/date-picker/date-picker.component';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   cancelRegisterEvent = output<boolean>();
-  private accountService = inject(AccountsService);
+  private accountService = inject(AccountService);
   private formBuilderService = inject(FormBuilder)
   private router = inject(Router);
 
