@@ -9,6 +9,7 @@ export class UserParams {
     orderBy = 'lastActive'
 
     constructor(user: User | null) {
+        console.log(user);
         this.gender = user?.gender === 'female' ? 'male' : 'female'
     }
 }

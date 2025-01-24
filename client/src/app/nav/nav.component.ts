@@ -5,6 +5,7 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown"
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserLoginInfo } from '../_models/user';
+import { MembersService } from '../_services/members.service';
 
 @Component({
   selector: 'app-nav',
@@ -26,6 +27,7 @@ export class NavComponent {
         //reset form when logged in
         this.model.username = "";
         this.model.password = "";
+
 
       },
       error: error => {

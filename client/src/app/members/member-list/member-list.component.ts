@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MembersService } from '../../_services/members.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './member-list.component.css'
 })
 export class MemberListComponent implements OnInit {
+
   memberService = inject(MembersService);
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
 
