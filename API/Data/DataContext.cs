@@ -1,4 +1,5 @@
 using System;
+using System.IO.Compression;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ public class DataContext(DbContextOptions options) : DbContext(options)
 
     //this is configured manually since we don't want to use the conventions
     public DbSet<UserLike> Likes { get; set; }
+
+    public DbSet<Message> Messages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,5 +32,18 @@ public class DataContext(DbContextOptions options) : DbContext(options)
                     .WithMany(l => l.LikedByUsers)
                     .HasForeignKey(s => s.TargetUserId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+
+        modelBuilder.Entity<Message>()
+                    .HasOne(x => x.Recipient)
+                    .WithMany(x => x.MessagesReceived)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        
+        modelBuilder.Entity<Message>()
+                    .HasOne(x => x.Sender)
+                    .WithMany(x => x.MessagesSent)
+                    .OnDelete(DeleteBehavior.Restrict);
+
     }
 }
