@@ -19,6 +19,7 @@ export class MessagesComponent implements OnInit {
   container = "Inbox";
   pageNumber = 1;
   pageSize = 5;
+  isOutbox = this.container === "Outbox";
   
   ngOnInit(): void {
     this.loadMessages();
@@ -26,6 +27,19 @@ export class MessagesComponent implements OnInit {
 
   loadMessages() {
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container);
+  }
+
+  deleteMessage(id: number) {
+    this.messageService.deleteMessage(id).subscribe({
+      next: _ => {
+        this.messageService.paginatedResult.update(previousData => {
+          if(previousData && previousData.items) {
+            previousData.items.splice(previousData.items.findIndex(m => m.id === id), 1);
+          }
+          return previousData;
+        })
+      }
+    })
   }
 
   pageChanged(event: any) {

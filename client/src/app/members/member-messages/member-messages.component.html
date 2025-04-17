@@ -11,8 +11,9 @@
             <li>
                 <div>
                     <span class="chat-img float-end">
-                        <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="Image of message sender"
-                            class="rounded-circle">
+                        <img src="{{message.senderPhotoUrl || './assets/user.png'}}"
+                             alt="Image of message sender"
+                             class="rounded-circle">
                     </span>
                     <div class="chat-body">
                         <div class="header">
@@ -28,7 +29,7 @@
                                 }
                             </small>
                         </div>
-                        <p>{{message.content}}</p> 
+                        <p>{{message.content}}</p>
                     </div>
                 </div>
             </li>
@@ -37,11 +38,21 @@
         }
     </div>
     <div class="card-footer">
-        <form>
+        <form #messageForm="ngForm"
+              (ngSubmit)="sendMessage()">
             <div class="input-group">
-                <input class="form-control input-sm" type="text" placeholder="Send a private message">
+                <input class="form-control input-sm"
+                       type="text"
+                       required
+                       [(ngModel)]="messageContent"
+                       name="messageContent"
+                       placeholder="Send a private message">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit"></button>
+                    <button class="btn btn-primary"
+                            type="submit"
+                            [disabled]="!messageForm.valid">
+                        Send
+                    </button>
                 </div>
             </div>
         </form>
